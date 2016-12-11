@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+<!-- Bootstrap -->
+<link href="/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css"
+	rel="stylesheet">
+</head>
+<body>
+	<div class="container">
+
+		<table class="table table-striped">
+			<tr>
+				<td>user Id</td>
+				<td>Name</td>
+				<td>email</td>
+			</tr>
+			{{#users}}
+			<tr>
+				<th scope="row">{{userId}}</th>
+				<td>{{name}}</td>
+				<td>{{email}}</td>
+			</tr>
+			{{/users}}
+		</table>
+	</div>
+</body>
+</html>
