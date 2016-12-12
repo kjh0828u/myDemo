@@ -39,14 +39,18 @@ public class UserController {
 		return "/user/form";
 	}
 
+	
+	
+	
+	
 	@GetMapping("/{id}/form")
 	public String updateForm(@PathVariable Long id, Model model, HttpSession session) {
 		Object tempUser = session.getAttribute(HttpSessionUtils.USER_SESSION_KEY);
-		if (tempUser == null){
+		if (HttpSessionUtils.isLoginUser(session)){
 			return "redirect:/users/loginForm";
 		}
 		
-		User sessionedUser = (User)tempUser;
+		User sessionedUser = HttpSessionUtils.getUserFormSession(session);
 		if(!id.equals(sessionedUser.getId())){
 			throw new IllegalStateException("you can update when you have your id");
 		}
@@ -58,13 +62,17 @@ public class UserController {
 	@PutMapping("/{id}")
 	public String update(@PathVariable Long id, User newUser, HttpSession session) {
 		
-		
 		User user = userRepository.findOne(id);
 		user.update(newUser);
 		userRepository.save(user);
 		return "redirect:/users";
 	}
 
+	
+	
+	
+	
+	
 	@GetMapping("/loginForm")
 	public String loginForm() {
 		return "/user/loginForm";
